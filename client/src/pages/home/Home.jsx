@@ -1,9 +1,11 @@
-import Menu from '../../components/menu/Menu';
+import Header from '../../components/header/Header';
+import { StyledGeneralContainer } from './home.styles';
 
 const Home = () => {
 	return (
 		<>
-			<Menu />
+			<Header />
+			<h2>HOLA</h2>
 		</>
 	);
 };
