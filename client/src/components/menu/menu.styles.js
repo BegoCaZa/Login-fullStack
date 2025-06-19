@@ -15,8 +15,10 @@ export const StyledMenuIconContainer = styled.img`
 	cursor: pointer;
 	position: absolute;
 	right: 0;
-	top: -10px;
+	top: -20px;
 	z-index: 2;
+	width: 40px;
+	height: 40px;
 `;
 
 export const StyledOptionsContainer = styled.ul`
@@ -43,7 +45,7 @@ export const StyledMenuItem = styled(NavLink)`
 	align-items: center;
 	gap: 11px;
 	text-decoration: none;
-	color: white;
+	color: black;
 	letter-spacing: 2px;
 
 	&.active {

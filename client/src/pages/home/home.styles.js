@@ -5,5 +5,5 @@ export const StyledGeneralContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	height: 100vh;
-	background-color: rgb(149, 149, 149);
+	background-color: rgb(220, 220, 220);
 `;
