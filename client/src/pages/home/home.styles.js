@@ -4,7 +4,6 @@ export const StyledGeneralContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
 	height: 100vh;
-	background-color: #f5f5f5;
+	background-color: rgb(149, 149, 149);
 `;
