@@ -1,11 +1,24 @@
+import { useContext, useEffect } from 'react';
 import { auth } from '../../lib/config/firebase.config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { AuthContext } from '../../lib/contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
-const Register = ({ setIsLogin }) => {
+const Register = () => {
+	const { user } = useContext(AuthContext);
+
+	const navigate = useNavigate();
+
+	console.log(user);
+
 	return (
 		<div>
 			<h2>Sign Up</h2>
 			<form onSubmit={event => handleSignUp(event)}>
+				<div>
+					<label htmlFor='name'>Name</label>
+					<input type='text' name='name' />
+				</div>
 				<div>
 					<label htmlFor='email'>Email:</label>
 					<input type='email' name='email' />
@@ -19,7 +32,7 @@ const Register = ({ setIsLogin }) => {
 			</form>
 			<p>
 				Already have an account?
-				<button onClick={() => setIsLogin(true)}>Log In</button>
+				<button onClick={() => navigate('/login')}>Log In</button>
 			</p>
 		</div>
 	);
@@ -30,8 +43,11 @@ const handleSignUp = async event => {
 	const formData = event.target;
 	const email = formData.email.value;
 	const password = formData.password.value;
+	// const userName = formData.name.value;
 	try {
 		await createUserWithEmailAndPassword(auth, email, password);
+		setName(userName);
+
 		console.log('usuario registrado correctamente');
 	} catch (error) {
 		console.log(error);

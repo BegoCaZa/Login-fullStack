@@ -5,15 +5,18 @@ import { auth } from '../config/firebase.config';
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+	// const [name, setName] = useState('');
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
 			setLoading(true);
 			if (user) {
 				setUser(user);
+
 				console.log('User is signed in:', user.email);
 			} else {
 				setUser(null);
+
 				console.log('No user');
 			}
 			setLoading(false);

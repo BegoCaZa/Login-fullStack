@@ -1,11 +1,30 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../lib/config/firebase.config';
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '../../lib/contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
-const LogIn = ({ setIsLogin }) => {
+const LogIn = () => {
+	const { user, loading } = useContext(AuthContext);
+
+	const navigate = useNavigate();
+
+	console.log(user);
+
+	useEffect(() => {
+		if (user) navigate('/');
+	}, [navigate, user]);
+
+	if (loading) return <h2>Loading...</h2>;
+
 	return (
 		<>
 			<h2>LogIn</h2>
 			<form onSubmit={loginUser}>
+				<div>
+					<label htmlFor='name'>Name</label>
+					<input type='text' name='name' />
+				</div>
 				<div>
 					<label htmlFor='email'>Email</label>
 					<input type='text' name='email' />
@@ -18,7 +37,7 @@ const LogIn = ({ setIsLogin }) => {
 			</form>
 			<p>
 				Don't have an account?
-				<button onClick={() => setIsLogin(false)}>Sign Up</button>
+				<button onClick={() => navigate('/register')}>Sign Up</button>
 			</p>
 		</>
 	);
@@ -29,8 +48,9 @@ const loginUser = async event => {
 	const formData = event.target;
 	const email = formData.email.value;
 	const password = formData.password.value;
+	const userName = formData.name.value;
 
-	if (!email || !password) return;
+	if (!email || !password || !userName) return;
 
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
