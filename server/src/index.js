@@ -4,8 +4,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const usersRoutes = require('./routes/users.routes');
 
-require('dotenv').config(); //permite leer el archivo .env
-const PORT = process.env.PORT; //las variables de entorno siempre va en MAYUSCULAS
+require('dotenv').config({ path: '../.env' }); //permite leer el archivo .env
+const PORT = process.env.PORT || 3000; //las variables de entorno siempre va en MAYUSCULAS
 
 const corsOptions = {
   origin: '*', // Orígenes permitidos (cuando esté en un dominio real, lo cambiaremos por ese dominio)

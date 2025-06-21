@@ -15,7 +15,7 @@ const Register = () => {
 	return (
 		<div>
 			<h2>Sign Up</h2>
-			<form onSubmit={event => handleSignUp(event, user)}>
+			<form onSubmit={handleSignUp}>
 				<div>
 					<label htmlFor='name'>Name</label>
 					<input type='text' name='name' />
@@ -39,21 +39,24 @@ const Register = () => {
 	);
 };
 
-const handleSignUp = async (event, user) => {
+const handleSignUp = async event => {
 	event.preventDefault();
 	const formData = event.target;
 	const email = formData.email.value;
 	const password = formData.password.value;
 	const userName = formData.name.value;
 	try {
-		await createUserWithEmailAndPassword(auth, email, password);
+		const user = await createUserWithEmailAndPassword(auth, email, password);
+		const firebaseUser = user.user;
+
 		const userData = {
-			uid: user.uid,
-			email: email,
+			uid: firebaseUser.uid,
+			email: firebaseUser.email,
 			userName: userName
 		};
+
 		await createUser(userData);
-		console.log('usuario registrado correctamente');
+		console.log('Usuario registrado correctamente');
 	} catch (error) {
 		console.log(error);
 	}

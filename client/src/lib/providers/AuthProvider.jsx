@@ -12,20 +12,9 @@ export const AuthProvider = ({ children }) => {
 			setLoading(true);
 			if (user) {
 				setUser(user);
-				// try {
-				// 				// Puedes hacer una verificación previa si ya existe
-				// 				await createUser({
-				// 					uid: user.uid,
-				// 					email: user.email,
-				// 					userName: userName // o desde localStorage si lo guardaste temporalmente
-				// 				});
-				// 			} catch (error) {
-				// 				console.log('Error creando usuario desde el contexto:', error.message);
-				// 			}
 				console.log('User is signed in:', user.email);
 			} else {
 				setUser(null);
-
 				console.log('No user');
 			}
 			setLoading(false);
