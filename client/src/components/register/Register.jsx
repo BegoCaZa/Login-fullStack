@@ -54,6 +54,7 @@ const handleSignUp = async event => {
 			email: firebaseUser.email,
 			userName: userName
 		};
+		console.log('usuario recibido', userData);
 
 		await createUser(userData);
 		console.log('Usuario registrado correctamente');

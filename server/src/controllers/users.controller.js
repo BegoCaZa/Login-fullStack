@@ -26,6 +26,7 @@ usersController.getUserById = async (req, res) => {
 };
 
 usersController.createUser = async (req, res) => {
+  console.log('Datos recibidos:', req.body);
   const newUser = new UserModel({ ...req.body });
   try {
     await newUser.save();
