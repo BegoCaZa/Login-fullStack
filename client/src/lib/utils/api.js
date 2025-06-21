@@ -36,3 +36,19 @@ export const createUser = async userData => {
 		throw new Error('Error en la creación del usuario: ' + error.message);
 	}
 };
+
+export const getUserName = async id => {
+	try {
+		const response = await fetch(URL_BASE + URL_API + id);
+		if (response.ok) {
+			const data = await response.json();
+			return data.userName;
+		} else {
+			throw new Error('Error al obtener el nombre de usuario');
+		}
+	} catch (error) {
+		throw new Error(
+			'Error en la obtención del nombre de usuario: ' + error.message
+		);
+	}
+};

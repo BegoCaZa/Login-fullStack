@@ -10,6 +10,10 @@ const Register = () => {
 
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		if (user) navigate('/');
+	}, [navigate, user]);
+
 	console.log(user);
 
 	return (
@@ -50,7 +54,7 @@ const handleSignUp = async event => {
 		const firebaseUser = user.user;
 
 		const userData = {
-			uid: firebaseUser.uid,
+			id: firebaseUser.uid,
 			email: firebaseUser.email,
 			userName: userName
 		};
@@ -58,6 +62,7 @@ const handleSignUp = async event => {
 
 		await createUser(userData);
 		console.log('Usuario registrado correctamente');
+		navigate('/'); //
 	} catch (error) {
 		console.log(error);
 	}
