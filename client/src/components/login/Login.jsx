@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../lib/config/firebase.config';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../lib/contexts/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const LogIn = () => {
 	const { user, loading } = useContext(AuthContext);
@@ -54,7 +54,7 @@ const loginUser = async event => {
 
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
-		navigate('/');
+		Navigate('/');
 	} catch (error) {
 		console.log(error);
 	}

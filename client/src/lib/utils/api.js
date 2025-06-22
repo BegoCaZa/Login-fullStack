@@ -40,8 +40,10 @@ export const createUser = async userData => {
 export const getUserName = async id => {
 	try {
 		const response = await fetch(URL_BASE + URL_API + id);
+		console.log('URL:', URL_BASE + URL_API + id);
 		if (response.ok) {
 			const data = await response.json();
+			console.log('Datos:', data);
 			return data.userName;
 		} else {
 			throw new Error('Error al obtener el nombre de usuario');

@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { auth } from '../../lib/config/firebase.config';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { AuthContext } from '../../lib/contexts/authContext';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { createUser } from '../../lib/utils/api';
 
 const Register = () => {
@@ -62,7 +62,7 @@ const handleSignUp = async event => {
 
 		await createUser(userData);
 		console.log('Usuario registrado correctamente');
-		navigate('/'); //
+		Navigate('/'); //
 	} catch (error) {
 		console.log(error);
 	}
