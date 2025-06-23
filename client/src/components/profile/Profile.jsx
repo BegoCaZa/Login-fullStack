@@ -27,6 +27,7 @@ const Profile = () => {
 				<EditingPage user={user} setEditingPage={setEditingPage} />
 			)}
 			<button onClick={() => setEditingPage(!editingPage)}>EDIT NAME</button>
+			<button onClick={() => navigate('/')}>BACK TO HOME</button>
 		</div>
 	);
 };
