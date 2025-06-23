@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../lib/contexts/authContext';
 import { getUserNameByEmail } from '../../lib/utils/api';
+import { useNavigate } from 'react-router-dom';
+import EditingPage from '../editingPage/EditingPage';
 
 const Profile = () => {
 	const { user, loading } = useContext(AuthContext);
 	const [userName, setUserName] = useState('');
+	const [editingPage, setEditingPage] = useState(false);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (user && user.email) {
@@ -16,7 +20,13 @@ const Profile = () => {
 	return (
 		<div>
 			<h1>Profile Page</h1>
-			<p>Hello {userName}</p>
+			<h2>Hello {userName}</h2>
+			{!editingPage ? (
+				<p>{user.email}</p>
+			) : (
+				<EditingPage user={user} setEditingPage={setEditingPage} />
+			)}
+			<button onClick={() => setEditingPage(!editingPage)}>EDIT NAME</button>
 		</div>
 	);
 };
