@@ -10,14 +10,14 @@ const ProfilePage = () => {
 	if (loading) return <h2>Loading...</h2>;
 	return (
 		<>
-			{!user && (
+			{!user ? (
 				<div>
 					<h2>You must be logged in to view this page</h2>
 					<button onClick={() => navigate('/')}>Go to Home</button>
 				</div>
+			) : (
+				<Profile />
 			)}
-			{user && <h2>Welcome, {user.email}</h2>}
-			{/* <Profile /> */}
 		</>
 	);
 };
