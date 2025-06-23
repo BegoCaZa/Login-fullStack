@@ -37,7 +37,7 @@ export const createUser = async userData => {
 	}
 };
 
-export const getUserName = async id => {
+export const getUserName = async email => {
 	try {
 		const response = await fetch(URL_BASE + URL_API + id);
 		console.log('URL:', URL_BASE + URL_API + id);
@@ -46,6 +46,28 @@ export const getUserName = async id => {
 			console.log('Datos:', data);
 			return data.userName;
 		} else {
+			throw new Error('Error al obtener el nombre de usuario');
+		}
+	} catch (error) {
+		throw new Error(
+			'Error en la obtención del nombre de usuario: ' + error.message
+		);
+	}
+};
+
+export const getUserNameByEmail = async email => {
+	try {
+		const response = await fetch(URL_BASE + URL_API + email);
+		console.log('URL:', URL_BASE + URL_API + email);
+		console.log('Response status:', response.status);
+
+		if (response.ok) {
+			const data = await response.json();
+			console.log('Datos recibidos:', data);
+			return data.userName;
+		} else {
+			const errorData = await response.text();
+			console.log('Error response:', errorData);
 			throw new Error('Error al obtener el nombre de usuario');
 		}
 	} catch (error) {

@@ -11,10 +11,10 @@ usersController.getAllUsers = async (req, res) => {
   }
 };
 
-usersController.getUserById = async (req, res) => {
-  const { id } = req.params;
+usersController.getUserByEmail = async (req, res) => {
+  const { email } = req.params;
   try {
-    const userFound = await UserModel.findOne({ id });
+    const userFound = await UserModel.findOne({ email: email });
 
     if (!userFound) {
       return res.status(404).send({ message: 'User not found' });

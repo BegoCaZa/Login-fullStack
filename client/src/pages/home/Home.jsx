@@ -5,7 +5,7 @@ import { AuthContext } from '../../lib/contexts/authContext';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../lib/config/firebase.config';
-import { getUserName } from '../../lib/utils/api';
+import { getUserName, getUserNameByEmail } from '../../lib/utils/api';
 
 const Home = () => {
 	const { user, loading } = useContext(AuthContext);
@@ -13,10 +13,10 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (user && user.uid) {
+		if (user && user.email) {
 			console.log('usuario:', user);
-			console.log('🔍 Buscando username para ID:', user.uid);
-			fetchUserName(user.uid, setUserName);
+			console.log(' Buscando username por email:', user.email);
+			fetchUserName(user.email, setUserName);
 		}
 	}, [user]);
 
@@ -36,9 +36,9 @@ const logout = async navigate => {
 	navigate('/'); //navego a la pagina de inicio
 };
 
-const fetchUserName = async (uid, setUserName) => {
+const fetchUserName = async (email, setUserName) => {
 	try {
-		const name = await getUserName(uid);
+		const name = await getUserNameByEmail(email);
 		setUserName(name);
 		console.log('Nombre del usuario obtenido:', name);
 	} catch (error) {
