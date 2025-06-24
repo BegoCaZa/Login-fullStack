@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import EditingPage from '../editingPage/EditingPage';
 
 const Profile = () => {
-	const { user, loading } = useContext(AuthContext);
+	const { user, loading, setUser } = useContext(AuthContext);
 	const [userName, setUserName] = useState('');
 	const [editingPage, setEditingPage] = useState(false);
 	const navigate = useNavigate();
@@ -24,7 +24,12 @@ const Profile = () => {
 			{!editingPage ? (
 				<p>{user.email}</p>
 			) : (
-				<EditingPage user={user} setEditingPage={setEditingPage} />
+				<EditingPage
+					user={user}
+					setEditingPage={setEditingPage}
+					email={user.email}
+					setUser={setUser}
+				/>
 			)}
 			<button onClick={() => setEditingPage(!editingPage)}>EDIT NAME</button>
 			<button onClick={() => navigate('/')}>BACK TO HOME</button>

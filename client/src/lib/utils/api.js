@@ -76,3 +76,17 @@ export const getUserNameByEmail = async email => {
 		);
 	}
 };
+
+export const updateNameByEmail = async (email, body) => {
+	try {
+		const response = await fetch(URL_BASE + URL_API + email, {
+			method: 'PATCH',
+			body: JSON.stringify(body),
+			headers: { 'Content-Type': 'application/json' }
+		});
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.log(error);
+	}
+};

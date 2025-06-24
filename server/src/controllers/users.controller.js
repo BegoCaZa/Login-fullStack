@@ -49,6 +49,17 @@ usersController.updateUser = async (req, res) => {
   }
 };
 
+usersController.updateName = async (req, res) => {
+  const { email } = req.params;
+  try {
+    await UserModel.updateOne({ email: email }, { $set: { ...req.body } });
+    const allUsers = await UserModel.find();
+    res.status(200).send(allUsers);
+  } catch (error) {
+    res.status(500).send({ message: 'Error updating name' + error });
+  }
+};
+
 usersController.deleteUserById = async (req, res) => {
   const { id } = req.params;
 
